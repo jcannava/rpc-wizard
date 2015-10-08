@@ -36,6 +36,17 @@
                     <br/><br/>
                     The information we collect will also be used to follow up with you to ensure you had a great experience installing the software and explain how we can show you that we are the world's
                     foremost experts in operating OpenStack&trade; clouds.</p>
+
+                    <h4>What you will need to have available before beginning:</h4>
+                    <li>Review the <a href="https://752f77aa107738c25d93-f083e9a6295a3f0714fa019ffdca65c3.ssl.cf1.rackcdn.com/cloud/private/openstack-software/ref-arch-certified-hardware-2015-02-17.png">Reference Architecture</a>.
+                        The minimum requirements for a full installation are:
+                        <ul><li>3 Servers to house all of the OpenStack&trade; and ancillary services</li>
+                            <li>1 Server to centralize all of the logs from the environment</li>
+                            <li>2 Servers for Compute services</li></ul>
+                        <b>Note</b> This configurator will also provide you the option to generate an "all in one" deployment if you are only interested in exploring OpenStack&trade;<br/></br>
+                    <li>A load balancer (software or hardware)</li>
+                    <li>3 RFC1918 Networks for the containers network, the overlay network, and the storage network.</li>
+                        <ul><li>If you have already used ip's in these ranges please have those available as well</li></ul>
                     <button type="button" class="btn btn-success pull-right">Let's Get Started!</button>
                 </div>
             </div>
@@ -330,5 +341,33 @@
         </div>
     </div>
     <!-- END STEP 1 -->
+    <!-- BEGIN STEP 2 -->
+    <div class="col-md-8 center-block vcenter">
+        <div class="panel panel-default">
+            <div class="panel-heading"><h3>Step 2: Network Information</h3></div>
+                <div class="panel-body">
+                    The Rackspace Private Cloud deployment of OpenStack&trade; requires access to three networks. Typically these ranges are:
+                    <ul><li>The Management Network (Control Plane for Infrastructure Services, OpenStack&trade; API's, and the OpenStack&trade; Dashboard</li>
+                        <li>The Tunnel Network (Data Plane for project (tenant) VXLAN overlay networks</li>
+                        <li>The Storage Network (Data Plane for storage services such as OpenStack&trade; block and object services.</li></ul>
+
+                    Please enter CIDR ranges in each of the following input areas. If you do not enter anything the defaults in each box will be used.<br/><br/>
+                    <label for="mgmt_net">Management Network:</label>
+                    <input type=text class="form-control" id="mgmt_net" placeholder="172.29.236.0/22"><br/>
+                    <label for="tunnel_net">Tunnel Network:</label>
+                    <input type="text" class="form-control" id="tunnel_net" placeholder="172.29.240.0/22"><br/>
+                    <label for="storage_net">Storage Network:</label>
+                    <input type="text" class="form-control" id="storage_net" placeholder="172.29.244.0/22"><br/>
+
+                    Because the OpenStack&trade; API's are spread across three servers in the environment  we require a load balancer to be part of the network. Its
+                    purpose is to balance requests to all of the API services and the OpenStack&trade; dashboard and ensure that in the failure of a service traffic
+                    can be balanced elsewhere.
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- END STEP 2 -->
+    <!-- BEGIN STEP 3 -->
+    <!-- END STEP 3 -->
   </body>
 </html>

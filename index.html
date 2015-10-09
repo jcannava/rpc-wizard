@@ -24,10 +24,10 @@
   <body>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     <script src="bootstrap/js/bootstrap.min.js"></script>
-    <!-- BEGIN STEP 0 (Description) -->
+    <!-- BEGIN Description -->
     <div class="col-md-8 center-block vcenter">
         <div class="panel panel-default">
-            <div class="panel-heading"><h3>Step 0: Overview</h3></div>
+            <div class="panel-heading"><h3>Overview</h3></div>
                 <div class="panel-body">
                     <p>The Rackspace Private Cloud powered by OpenStack&trade; uses the <a href="http://github.com/openstack/openstack-ansible">openstack-ansible</a> project to configure and install an OpenStack based private cloud.
                     The Rackspace Private Cloud offering can be run in your datacenter, or ours, so we are provided this tool to generate a configuration that is based on your environment and will enable you to deploy your own OpenStack&trade;
@@ -36,23 +36,37 @@
                     <br/><br/>
                     The information we collect will also be used to follow up with you to ensure you had a great experience installing the software and explain how we can show you that we are the world's
                     foremost experts in operating OpenStack&trade; clouds.</p>
-
-                    <h4>What you will need to have available before beginning:</h4>
-                    <li>Review the <a href="https://752f77aa107738c25d93-f083e9a6295a3f0714fa019ffdca65c3.ssl.cf1.rackcdn.com/cloud/private/openstack-software/ref-arch-certified-hardware-2015-02-17.png">Reference Architecture</a>.
-                        The minimum requirements for a full installation are:
-                        <ul><li>3 Servers to house all of the OpenStack&trade; and ancillary services</li>
-                            <li>1 Server to centralize all of the logs from the environment</li>
-                            <li>2 Servers for Compute services</li></ul>
-                        <b>Note</b> This configurator will also provide you the option to generate an "all in one" deployment if you are only interested in exploring OpenStack&trade;<br/></br>
-                    <li>A load balancer (software or hardware)</li>
-                    <li>3 RFC1918 Networks for the containers network, the overlay network, and the storage network.</li>
-                        <ul><li>If you have already used ip's in these ranges please have those available as well</li></ul>
+                    <br/><br/>
                     <button type="button" class="btn btn-success pull-right">Let's Get Started!</button>
+                    </p>
                 </div>
             </div>
         </div>
     </div>
-    <!-- END STEP 0 -->
+    <!-- END OVERVIEW -->
+    <!-- BEGIN PRE-REQUISITES -->
+    <div class="col-md-8 center-block vcenter">
+        <div class="panel panel-default">
+            <div class="panel-heading"><h3>Prerequisites</h3></div>
+                <div class="panel-body">
+                    <center><h4>Rackspace Private Cloud Standard Reference Architecture</h4></center>
+                    <center><img src="img/ref-arch-certified-hardware-2015-02-17.png"></center>
+                    <br/><br/>
+                    <p>Based on this Reference Architecture you will need to have the following available to you before using this tool
+                    <ul><li>3 Servers, with Ubuntu 14.04 installed and an ip address. These servers will be responsible for running all of the OpenStack&trade; and ancillary services</li>
+                        <li>1 Server, with Ubuntu 14.04 installed and an ip address. This server will have elasticsearch, logstash, and kibana installed to centralize all of the logs from the environment.</li>
+                        <li>2 Servers, with Ubuntu 14.04 installed and an ip address, for Compute services</li>
+                        <b>Note</b> This configurator will also provide you the option to generate an "all in one" deployment if you are only interested in exploring OpenStack&trade;<br/>
+                    <li>Either a softoware or hardware load balancer. If you have a software load balancer it will need to run on a server separate from where the OpenStack&trade; services will be run.</li>
+                    <li>3 RFC1918 Networks for the containers network, the overlay network, and the storage network.</li>
+                        <ul><li>If you have already used ip's in these ranges please have those available as well</li></ul>
+                    <button type="button" class="btn btn-success pull-right">Let's Get Started!</button>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- END PRE-REQUISITES -->
     <!-- BEGIN STEP 1 -->
     <div class="col-md-8 center-block vcenter">
         <div class="panel panel-default">
@@ -60,29 +74,34 @@
                 <div class="panel-body">
                     <form role="form" id="contact_info">
                         <div class="form-group">
-                            <h5>Before we build your OpenStack private cloud configuration we need to collect a little information about you. At the end of this wizard you will receive an email at the address you indicate below containing all of the configuration we generate here and instructions on how to install your OpenStack private cloud!</h5>
-                            <table class="table borderless">
-                            <tbody>
-                             <td><label for="firstName">First Name</label>
-                                 <input type="name" class="form-control" id="firstName" placeholder="First Name"></td>
-                             <td><label for="surname">Surname</label>
-                                 <input type="name" class="form-control" id="surname" placeholder="Surname"></td>
-                            </tr>
-                            <tr>
-                             <td colspan=2><label for="emailaddress">E-Mail Address</label>
-                                 <input type="email" class="form-control" id="email" placeholder="E-Mail"></td>
-                            </tr>
-                            <tr>
-                             <td><label for="title">Title</label>
-                                 <input type="text" class="form-control" id="title" placeholder="Title"></td>
-                             <td><label for="phone">Phone Number</label>
-                                 <input type="tel" class="form-control" id="phone" placeholder="Phone Number"></td>
-                            </tr>
-                            <tr>
-                             <td><label for="company">Company or Organization</label>
-                                 <input type="text" class="form-control" id="company" placeholder="Company or Organization"</td>
-                             <td><label for="country">Country</label><br/>
-                                 <select id="country" name="country">
+                            <div class="col-md-12">
+                                <p>Before we build your OpenStack private cloud configuration we need to collect a little information about you. At the end of this wizard you will receive an email at the address you indicate below containing all of the configuration we generate here and instructions on how to install your OpenStack private cloud!</p>
+                            </div>
+                            <div class="col-md-6">
+                                 <label for="firstName">First Name</label>
+                                     <input type="name" class="form-control" id="firstName" placeholder="First Name">
+                                     <br/>
+                                 <label for="title">Title</label>
+                                     <input type="text" class="form-control" id="title" placeholder="Title">
+                                     <br/>
+                                 <label for="emailaddress">E-Mail Address</label>
+                                     <input type="email" class="form-control" id="email" placeholder="E-Mail">
+                                     <br/>
+                             </div>
+                             <div class="col-md-6">
+                                 <label for="surname">Surname</label>
+                                     <input type="name" class="form-control" id="surname" placeholder="Surname">
+                                     <br/>
+                                 <label for="company">Company or Organization</label>
+                                     <input type="text" class="form-control" id="company" placeholder="Company or Organization">
+                                     <br/>
+                                 <label for="phone">Phone Number</label>
+                                     <input type="tel" class="form-control" id="phone" placeholder="Phone Number">
+                                     <br/>
+                            </div>
+                            <div class="col-md-6">
+                             <label for="country">Country</label><br/>
+                                 <select class="input-md" id="country" name="country">
                                      <option>---</option>
                                      <option value="AF">Afghanistan</option>
                                      <option value="AX">Åland Islands</option>
@@ -328,12 +347,16 @@
                                      <option value="YE">Yemen</option>
                                      <option value="ZM">Zambia</option>
                                      <option value="ZW">Zimbabwe</option>
-                                 </select></td>
-                             </tr>
-                             <tr>
-                              <td colspan=2><input type="checkbox" name="contact" id="contact">&nbsp;&nbsp;<label for="contact">Contact me for information regarding support or training</label></td>
-                             <tr>
-                              <td colspan=2><button type="button" class="btn btn-success pull-right">Next</td>
+                                 </select>
+                                 <br/><br/>
+                            </div>
+                            <div class="col-md-12">
+                                 <input type="checkbox" name="contact" id="contact">&nbsp;&nbsp;<label for="contact">Contact me for information regarding support or training</label></td>
+                                 <br/>
+                             </div>
+                             <div class="col-md-12">
+                                 <button type="button" class="btn btn-success pull-right">Next</td>
+                             </div>
                             </table>
                         </div>
                 </div>
@@ -346,22 +369,42 @@
         <div class="panel panel-default">
             <div class="panel-heading"><h3>Step 2: Network Information</h3></div>
                 <div class="panel-body">
+                    <div class="col-md-12">
                     The Rackspace Private Cloud deployment of OpenStack&trade; requires access to three networks. Typically these ranges are:
                     <ul><li>The Management Network (Control Plane for Infrastructure Services, OpenStack&trade; API's, and the OpenStack&trade; Dashboard</li>
                         <li>The Tunnel Network (Data Plane for project (tenant) VXLAN overlay networks</li>
                         <li>The Storage Network (Data Plane for storage services such as OpenStack&trade; block and object services.</li></ul>
 
                     Please enter CIDR ranges in each of the following input areas. If you do not enter anything the defaults in each box will be used.<br/><br/>
-                    <label for="mgmt_net">Management Network:</label>
-                    <input type=text class="form-control" id="mgmt_net" placeholder="172.29.236.0/22"><br/>
-                    <label for="tunnel_net">Tunnel Network:</label>
-                    <input type="text" class="form-control" id="tunnel_net" placeholder="172.29.240.0/22"><br/>
-                    <label for="storage_net">Storage Network:</label>
-                    <input type="text" class="form-control" id="storage_net" placeholder="172.29.244.0/22"><br/>
-
-                    Because the OpenStack&trade; API's are spread across three servers in the environment  we require a load balancer to be part of the network. Its
+                    </div>
+                    <div class="col-md-3">
+                        <label for="mgmt_net">Management Network:</label>
+                        <input type=text class="form-control" id="mgmt_net" value="172.29.236.0/22" placeholder="172.29.236.0/22">
+                    </div>
+                    <div class="col-md-3">
+                        <label for="tunnel_net">Tunnel Network:</label>
+                        <input type="text" class="form-control" id="tunnel_net" value="172.29.240.0/22" placeholder="172.29.240.0/22">
+                    </div>
+                    <div class="col-md-3">
+                        <label for="storage_net">Storage Network:</label>
+                        <input type="text" class="form-control" id="storage_net" value="172.29.244.0/22" placeholder="172.29.244.0/22">
+                    </div>
+                    <div class="col-md-12">
+                        <br/><br/><p>Because the OpenStack&trade; API's are spread across three servers in the environment  we require a load balancer to be part of the network. Its
                     purpose is to balance requests to all of the API services and the OpenStack&trade; dashboard and ensure that in the failure of a service traffic
-                    can be balanced elsewhere.
+                    can be balanced elsewhere.<br/><br/></p>
+                    </div>
+                    <div class="col-md-3">
+                        <label for="lb_ext">Load Balancer External IP:</label>
+                        <input type=text class="form-control" id="lb_ext"><br/>
+                    </div>
+                    <div class="col-md-3">
+                        <label for="lb_int">Load Balancer Internal IP:</label>
+                        <input type=text class="form-control" id="lb_int"><br/>
+                    </div>
+                    <div class="col-md-12">
+                        <button type="button" class="btn btn-success pull-right">Next</td>
+                    </div>
                 </div>
             </div>
         </div>

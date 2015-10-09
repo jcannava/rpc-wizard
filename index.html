@@ -57,7 +57,7 @@
                         <li>1 Server, with Ubuntu 14.04 installed and an ip address. This server will have elasticsearch, logstash, and kibana installed to centralize all of the logs from the environment.</li>
                         <li>2 Servers, with Ubuntu 14.04 installed and an ip address, for Compute services</li>
                         <b>Note</b> This configurator will also provide you the option to generate an "all in one" deployment if you are only interested in exploring OpenStack&trade;<br/>
-                    <li>Either a softoware or hardware load balancer. If you have a software load balancer it will need to run on a server separate from where the OpenStack&trade; services will be run.</li>
+                    <li>Either a software or hardware load balancer. If you have a software load balancer it will need to run on a server separate from where the OpenStack&trade; services will be run.</li>
                     <li>3 RFC1918 Networks for the containers network, the overlay network, and the storage network.</li>
                         <ul><li>If you have already used ip's in these ranges please have those available as well</li></ul>
                     <button type="button" class="btn btn-success pull-right">Got it. Let's Go!</button>
@@ -351,11 +351,11 @@
                                  <br/><br/>
                             </div>
                             <div class="col-md-12">
-                                 <input type="checkbox" name="contact" id="contact">&nbsp;&nbsp;<label for="contact">Contact me for information regarding support or training</label></td>
+                                 <input type="checkbox" name="contact" id="contact">&nbsp;&nbsp;<label for="contact">Contact me for information regarding support or training</label>
                                  <br/>
                              </div>
                              <div class="col-md-12">
-                                 <button type="button" class="btn btn-success pull-right">Next</td>
+                                 <button type="button" class="btn btn-success pull-right">Next
                              </div>
                             </table>
                         </div>
@@ -403,7 +403,7 @@
                         <input type=text class="form-control" id="lb_int"><br/>
                     </div>
                     <div class="col-md-12">
-                        <button type="button" class="btn btn-success pull-right">Next</td>
+                        <button type="button" class="btn btn-success pull-right">Next
                     </div>
                 </div>
             </div>
@@ -440,31 +440,42 @@
                                 MariaDB Galera services can be found <a href="https://mariadb.com/kb/en/mariadb/what-is-mariadb-galera-cluster/">here</a>.
                                 Information on RabbitMQ is available <a href="https://www.rabbitmq.com">here</a>.</em>
                             <br/><br/>
+                            <p>In addition to the three infrastructure nodes we require a host to centralize the logs for the entirety of the OpenStack&trade; environment.
+                               Elasticsearch, Logstash, and Kibana will be installed on this host so that you will be able to review and visualize what's happening inside
+                               of your OpenStack&trade; environment.</p>
+                               <br/>
                         </div>
                         <div class="col-md-12">
-                            <div class="col-md-4">
-                                <p class="lead">Infrastructure host 1</p>
+                            <div class="col-md-3">
+                                <p class="lead">Infra host 1</p>
                                 <label for="infra_1_name">Hostname:</label>
                                 <input type="text" id="infra_1_name" placeholder="infra1.foo.com"><br/><br/>
                                 <label for="infra_1_ip">IP Address:</label>
                                 <input type="text" id="infra_1_ip" placeholder="192.168.0.1"><br/><br/>
                             </div>
-                            <div class="col-md-4">
-                                <p class="lead">Infrastructure host 2</p>
+                            <div class="col-md-3">
+                                <p class="lead">Infra host 2</p>
                                 <label for="infra_2_name">Hostname:</label>
                                 <input type="text" id="infra_2_name" placeholder="infra2.foo.com"><br/><br/>
                                 <label for="infra_2_ip">IP Address:</label>
                                 <input type="text" id="infra_2_ip" placeholder="192.168.0.2"><br/><br/>
                             </div>
-                            <div class="col-md-4">
-                                <p class="lead">Infrastructure host 3</p>
+                            <div class="col-md-3">
+                                <p class="lead">Infra host 3</p>
                                 <label for="infra_3_name">Hostname:</label>
                                 <input type="text" id="infra_3_name" placeholder="infra3.foo.com"><br/><br/>
                                 <label for="infra_3_ip">IP Address:</label>
                                 <input type="text" id="infra_3_ip" placeholder="192.168.0.3"><br/><br/>
                             </div>
+                            <div class="col-md-3">
+                                <p class="lead">Logging host</p>
+                                <label for="log_name">Hostname:</label>
+                                <input type="text" id="log_name" placeholder="logging.foo.com"><br/><br/>
+                                <label for="log_ip">IP Address:</label>
+                                <input type="text" id="log_ip" placeholder="192.168.0.4"><br/><br/>
+                            </div>
                         <div class="col-md-12">
-                            <button type="button" class="btn btn-success pull-right">Next</td>
+                            <button type="button" class="btn btn-success pull-right">Next
                         </div>
                     </div>
                 </div>
@@ -472,5 +483,38 @@
         </div>
     </div>
     <!-- END STEP 3 -->
+    <!-- BEGIN STEP 4 -->
+    <div class="col-md-8 center-block vcenter" id="step3">
+        <div class="panel panel-default">
+            <div class="panel-heading"><h3>Step 4: Compute Hosts Information</h3></div>
+                <div class="panel-body">
+                    <div class="col-md-12">
+                        <p>The compute hosts will be where any virtual machines created and managed by OpenStack&trade; will reside. For the purposes of this tool
+                           we will only be adding a couple, however, it is quite easy to expand to many after the fact.</p>
+                           <br/><br/>
+                        <div class="col-md-12 center-block">
+                            <div class="col-md-3">
+                                <p class="lead">Compute host 1</p>
+                                <label for="compute_1_name">Hostname:</label>
+                                <input type="text" id="compute_1_name" placeholder="compute1.foo.com"><br/><br/>
+                                <label for="compute_1_ip">IP Address:</label>
+                                <input type="text" id="compute_1_ip" placeholder="192.168.0.5"><br/><br/>
+                            </div>
+                            <div class="col-md-3">
+                                <p class="lead">Compute host 2</p>
+                                <label for="compute_2_name">Hostname:</label>
+                                <input type="text" id="compute_2_name" placeholder="compute2.foo.com"><br/><br/>
+                                <label for="compute_2_ip">IP Address:</label>
+                                <input type="text" id="compute_2_ip" placeholder="192.168.0.2"><br/><br/>
+                            </div>
+                    </div>
+                        <div class="col-md-12">
+                            <button type="button" class="btn btn-success pull-right">Next
+                        </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- END STEP 4 -->
   </body>
 </html>

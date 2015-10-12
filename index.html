@@ -24,6 +24,19 @@
   <body>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     <script src="bootstrap/js/bootstrap.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#prequisites').hide();
+            $('#step1').hide();
+            $('#step2').hide();
+            $('#step3').hide();
+            $('#step4').hide();
+            $('#step5').hide();
+            $('#review').hide();
+        });
+    </script>
+    <form role="form" id="build_config">
+
     <!-- BEGIN Description -->
     <div class="col-md-8 center-block vcenter" id="overview">
         <div class="panel panel-default">
@@ -37,7 +50,7 @@
                     The information we collect will also be used to follow up with you to ensure you had a great experience installing the software and explain how we can show you that we are the world's
                     foremost experts in operating OpenStack&trade; clouds.</p>
                     <br/><br/>
-                    <button type="button" class="btn btn-success pull-right">Ready to Get Started?</button>
+                    <button type="button" class="btn btn-info pull-right" onclick="$('#overview').hide();$('#prequisites').show();">Ready to Get Started?</button>
                     </p>
                 </div>
             </div>
@@ -60,8 +73,15 @@
                     <li>Either a software or hardware load balancer. If you have a software load balancer it will need to run on a server separate from where the OpenStack&trade; services will be run.</li>
                     <li>3 RFC1918 Networks for the containers network, the overlay network, and the storage network.</li>
                         <ul><li>If you have already used ip's in these ranges please have those available as well</li></ul>
-                    <button type="button" class="btn btn-success pull-right">Got it. Let's Go!</button>
                     </p>
+                    <div class="col-md-12">
+                        <div class="col-md-3 pull-right">
+                            <button type="button" class="btn btn-info pull-right" onclick="$('#prequisites').hide();$('#step1').show()">Got it. Let's Go!</button>
+                        </div>
+                        <div class="col-md-2 pull-right">
+                            <button type="button" class="btn btn-info pull-right" onclick="$('#prequisites').hide();$('#overview').show()">Go Back</button>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -72,7 +92,6 @@
         <div class="panel panel-default">
         <div class="panel-heading"><h3>Step 1: About You</h3></div>
                 <div class="panel-body">
-                    <form role="form" id="contact_info">
                         <div class="form-group">
                             <div class="col-md-12">
                                 <p>Before we build your OpenStack private cloud configuration we need to collect a little information about you. At the end of this wizard you will receive an email at the address you indicate below containing all of the configuration we generate here and instructions on how to install your OpenStack private cloud!</p>
@@ -355,9 +374,13 @@
                                  <br/>
                              </div>
                              <div class="col-md-12">
-                                 <button type="button" class="btn btn-success pull-right">Next
+                                 <div class="col-md-2 pull-right">
+                                     <button type="button" class="btn btn-info pull-right" onclick="$('#step1').hide();$('#step2').show();">Next
+                                 </div>
+                                 <div class="col-md-1 pull-right">
+                                     <button type="button" class="btn btn-info pull-right" onclick="$('#step1').hide();$('#prequisites').show();">Back
+                                 </div>
                              </div>
-                            </table>
                         </div>
                 </div>
             </div>
@@ -408,7 +431,12 @@
                         <input type=text class="form-control" id="lb_int"><br/>
                     </div>
                     <div class="col-md-12">
-                        <button type="button" class="btn btn-success pull-right">Next
+                        <div class="col-md-2 pull-right">
+                            <button type="button" class="btn btn-info pull-right" onclick="$('#step2').hide();$('#step3').show();">Next
+                        </div>
+                        <div class="col-md-2 pull-right">
+                            <button type="button" class="btn btn-info pull-right" onclick="$('#step2').hide();$('#step1').show();">Back
+                        </div>
                     </div>
                 </div>
             </div>
@@ -484,7 +512,12 @@
                                 <input type="text" id="log_ip" placeholder="192.168.0.4"><br/><br/>
                             </div>
                         <div class="col-md-12">
-                            <button type="button" class="btn btn-success pull-right">Next
+                            <div class="col-md-2 pull-right">
+                                <button type="button" class="btn btn-info pull-right" onclick="$('#step3').hide();$('#step4').show();">Next
+                            </div>
+                            <div class="col-md-1 pull-right">
+                                <button type="button" class="btn btn-info pull-right" onclick="$('#step3').hide();$('#step2').show();">Back
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -493,13 +526,14 @@
     </div>
     <!-- END STEP 3 -->
     <!-- BEGIN STEP 4 -->
-    <div class="col-md-8 center-block vcenter" id="step3">
+    <div class="col-md-8 center-block vcenter" id="step4">
         <div class="panel panel-default">
             <div class="panel-heading"><h3>Step 4: Compute Hosts Information</h3></div>
                 <div class="panel-body">
                     <div class="col-md-12">
-                        <p>The compute hosts will be where any virtual machines created and managed by OpenStack&trade; will reside. For the purposes of this tool
-                           we will only be adding a couple, however, it is quite easy to expand to many after the fact.</p>
+                        <p>The compute hosts will be where any virtual machines created and managed by OpenStack&trade; will reside.
+                        At a minimum you must provide two compute nodes, however, this tool will allow you to configure up to 4. Once
+                        you are up and running you will find that it is quite simple to add additional compute hosts as needed.</p>
                            <br/><br/>
                         <div class="col-md-12 center-block">
                             <div class="col-md-3">
@@ -518,14 +552,118 @@
                                 <label for="compute_2_ip">IP Address:</label>
                                 <input type="text" id="compute_2_ip" placeholder="192.168.0.2"><br/><br/>
                             </div>
+                            <div class="col-md-3">
+                                <span class="glyphicon glyphicon-hdd"></span>
+                                <label>Compute host 1</label>
+                                <label for="compute_1_name">Hostname:</label>
+                                <input type="text" id="compute_1_name" placeholder="compute1.foo.com"><br/><br/>
+                                <label for="compute_1_ip">IP Address:</label>
+                                <input type="text" id="compute_1_ip" placeholder="192.168.0.5"><br/><br/>
+                            </div>
+                            <div class="col-md-3">
+                                <span class="glyphicon glyphicon-hdd"></span>
+                                <label>Compute host 1</label>
+                                <label for="compute_1_name">Hostname:</label>
+                                <input type="text" id="compute_1_name" placeholder="compute1.foo.com"><br/><br/>
+                                <label for="compute_1_ip">IP Address:</label>
+                                <input type="text" id="compute_1_ip" placeholder="192.168.0.5"><br/><br/>
+                            </div>
                     </div>
                         <div class="col-md-12">
-                            <button type="button" class="btn btn-success pull-right">Next
+                            <div class="col-md-2 pull-right">
+                                <button type="button" class="btn btn-info pull-right" onclick="$('#step4').hide();$('#step5').show();">Next
+                            </div>
+                            <div class="col-md-1 pull-right">
+                                <button type="button" class="btn btn-info pull-right" onclick="$('#step4').hide();$('#step3').show();">Back
+                            </div>
                         </div>
                 </div>
             </div>
         </div>
     </div>
     <!-- END STEP 4 -->
+    <!-- BEGIN STEP 5 -->
+    <div class="col-md-8 center-block vcenter" id="step5">
+        <div class="panel panel-default">
+            <div class="panel-heading"><h3>Step 5: Storage Hosts Information (Optional)</h3></div>
+                <div class="panel-body">
+                    <div class="col-md-12">
+                        <p>To use the OpenStack&trade; Block Storage service to provide storage volumes to
+                        virtual machines created by OpenStack&trade; Compute you will need to define a minimum
+                        of one host that can run the service and has sufficient storage to create storage volumes.
+                        Up to 4 storage hosts can be defined with this tool, however, you will find it to be quite
+                        simple to add additional hosts as needed.<br/><br/></p>
+                    </div>
+                    <div class="col-md-12 center-block">
+                        <div class="col-md-3">
+                            <span class="glyphicon glyphicon-hdd"></span>
+                            <label>Storage host 1</label>
+                            <label for="storage_1_name">Hostname:</label>
+                            <input type="text" id="storage_1_name" placeholder="storage1.foo.com"><br/><br/>
+                            <label for="storage_1_ip">IP Address:</label>
+                            <input type="text" id="storage_1_ip" placeholder="192.168.0.6"><br/><br/>
+                        </div>
+                        <div class="col-md-3">
+                            <span class="glyphicon glyphicon-hdd"></span>
+                            <label>Storage host 2</label>
+                            <label for="storage_2_name">Hostname:</label>
+                            <input type="text" id="storage_2_name" placeholder="storage2.foo.com"><br/><br/>
+                            <label for="storage_2_ip">IP Address:</label>
+                            <input type="text" id="storage_2_ip" placeholder="192.168.0.7"><br/><br/>
+                        </div>
+                        <div class="col-md-3">
+                            <span class="glyphicon glyphicon-hdd"></span>
+                            <label>Storage host 3</label>
+                            <label for="storage_3_name">Hostname:</label>
+                            <input type="text" id="storage_3_name" placeholder="storage3.foo.com"><br/><br/>
+                            <label for="storage_3_ip">IP Address:</label>
+                            <input type="text" id="storage_3_ip" placeholder="192.168.0.8"><br/><br/>
+                        </div>
+                        <div class="col-md-3">
+                            <span class="glyphicon glyphicon-hdd"></span>
+                            <label>Storage host 4</label>
+                            <label for="storage_4_name">Hostname:</label>
+                            <input type="text" id="storage_4_name" placeholder="storage4.foo.com"><br/><br/>
+                            <label for="storage_4_ip">IP Address:</label>
+                            <input type="text" id="storage_4_ip" placeholder="192.168.0.9"><br/><br/>
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="col-md-2 pull-right">
+                            <button type="button" class="btn btn-info pull-right" onclick="$('#step5').hide();$('#review').show();">Review
+                        </div>
+                        <div class="col-md-1 pull-right">
+                            <button type="button" class="btn btn-info pull-right" onclick="$('#step5').hide();$('#step4').show();">Back
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- END STEP 5-->
+    <!-- BEGIN REVIEW -->
+    <div class="col-md-8 center-block vcenter" id="step5">
+        <div class="panel panel-default">
+            <div class="panel-heading"><h3>Review your Configuration</h3></div>
+                <div class="panel-body">
+                    <div class="col-md-12">
+                        <p>Congratulations! You have completed all of the information necessary to get started with the Rackspace 
+                        Private Cloud powered by OpenStack&trade;. Please review the information you entered and then click Send.
+                        </p>
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    <div class="col-md-2 pull-right">
+                        <button type="button" class="btn btn-info pull-right">Send
+                    </div>
+                    <div class="col-md-1 pull-right">
+                        <button type="button" class="btn btn-info pull-right" onclick="$('#review').hide();$('#step5').show();">Back
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- END REVIEW -->
+    </form>
   </body>
 </html>

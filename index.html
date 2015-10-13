@@ -24,6 +24,7 @@
   <body>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     <script src="bootstrap/js/bootstrap.min.js"></script>
+    <script src="bootstrap/js/opc.js"></script>
     <script>
         $(document).ready(function () {
             $('#prequisites').hide();
@@ -33,6 +34,16 @@
             $('#step4').hide();
             $('#step5').hide();
             $('#review').hide();
+        });
+        $('#generate_preview').click(function (evt) {
+            evt.preventDefault();
+            var the_form = document.getElementById('build_config');
+            var txt = "";
+            var i;
+            for ( i = 0; i < the_form.length; i++ ) {
+                txt = txt + the_form.elements[i] + "<br/>";
+            }
+            document.getElementById('review_inputs').innerHTML = txt
         });
     </script>
     <form role="form" id="build_config">
@@ -570,7 +581,7 @@
                             </div>
                     </div>
                         <div class="col-md-12">
-                            <div class="col-md-2 pull-right">
+                            <div class="col-md-2 pull-right" id="generate_preview">
                                 <button type="button" class="btn btn-info pull-right" onclick="$('#step4').hide();$('#step5').show();">Next
                             </div>
                             <div class="col-md-1 pull-right">
@@ -642,7 +653,7 @@
     </div>
     <!-- END STEP 5-->
     <!-- BEGIN REVIEW -->
-    <div class="col-md-8 center-block vcenter" id="step5">
+    <div class="col-md-8 center-block vcenter" id="review">
         <div class="panel panel-default">
             <div class="panel-heading"><h3>Review your Configuration</h3></div>
                 <div class="panel-body">
@@ -650,14 +661,17 @@
                         <p>Congratulations! You have completed all of the information necessary to get started with the Rackspace 
                         Private Cloud powered by OpenStack&trade;. Please review the information you entered and then click Send.
                         </p>
+                        <h5>About You:</h5>
+                        <div class="col-md-12" id="review_inputs">
+                        </div>
                     </div>
-                </div>
-                <div class="col-md-12">
-                    <div class="col-md-2 pull-right">
-                        <button type="button" class="btn btn-info pull-right">Send
-                    </div>
-                    <div class="col-md-1 pull-right">
-                        <button type="button" class="btn btn-info pull-right" onclick="$('#review').hide();$('#step5').show();">Back
+                    <div class="col-md-12">
+                        <div class="col-md-2 pull-right">
+                            <button type="button" class="btn btn-info pull-right">Send
+                        </div>
+                        <div class="col-md-1 pull-right">
+                            <button type="button" class="btn btn-info pull-right" onclick="$('#review').hide();$('#step5').show();">Back
+                        </div>
                     </div>
                 </div>
             </div>

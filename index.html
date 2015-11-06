@@ -35,18 +35,6 @@
             $('#step5').hide();
             $('#review').hide();
 
-            $('#generate_preview').click(function (evt) {
-                evt.preventDefault();
-                $('#step5').hide();
-                $('#review').show();
-                var the_form = document.getElementById('build_config');
-                var txt = "";
-                var i;
-                for ( i = 0; i < the_form.length; i++ ) {
-                    txt = txt + the_form.elements[i].value + "<br/>";
-                }
-                document.getElementById('review_inputs').innerHTML = txt
-            });
         });
     </script>
     <form role="form" id="build_config">
@@ -386,8 +374,8 @@
                                  <div class="col-md-4 col-md-offset-2">
                                       <label for="deployment_type">Deployment Type:</label>
                                       <select class="input-md" id="deployment_type" name="deployment_type">
-                                          <option value="aio">Looking to try on a single host</option>
-                                          <option value="full">Looking to do a full deployment</option>
+                                          <option value="aio">Want to try on a single host</option>
+                                          <option value="full">Want to do a full deployment</option>
                                       </select>
                                       <br/><br/>
                                  </div>
